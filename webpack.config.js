@@ -45,6 +45,9 @@ module.exports = {
     },
     extensions: ['*', '.js', '.vue', '.json']
   },
+  externals: {
+    "Daum": "daum"
+  },
   devServer: {
     historyApiFallback: true,
     noInfo: true,
