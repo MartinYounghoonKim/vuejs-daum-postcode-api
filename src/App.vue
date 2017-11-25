@@ -1,31 +1,35 @@
 <template>
   <div id="app">
     <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+    <h1>Daum Postcode API with Vuejs</h1>
+    <div class="postcode-input-wrapper">
+      <b-form-group id="fieldset1" description="Enter your Address" label="Address1">
+        <b-form-input class="address1" id="input1"></b-form-input>
+        <b-button @click="showModal" variant="success">Find Address</b-button>
+      </b-form-group>
+      <b-form-group id="fieldset2" description="Enter your detail Address" label="Address2">
+        <b-form-input id="input2"></b-form-input>
+      </b-form-group>
+    </div>
+
+    <!-- Daum API Modal -->
+    <daum-post-code-modal ref="modal"></daum-post-code-modal>
+    <!--// Daum API Modal -->
   </div>
 </template>
 
 <script>
+import DaumPostCodeModal from './Components/DaumPostCodeModal';
+
 export default {
   name: 'app',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+  methods: {
+    showModal () {
+      this.$refs.modal.show();
     }
+  },
+  components: {
+    DaumPostCodeModal
   }
 }
 </script>
@@ -57,4 +61,17 @@ li {
 a {
   color: #42b983;
 }
+.postcode-input-wrapper{
+  width: 600px;
+  margin: 0 auto;
+  text-align: left;
+}
+.form-control{
+  display: inline-block;
+  vertical-align: top;
+}
+.address1{
+  width: 475px;
+}
+
 </style>
