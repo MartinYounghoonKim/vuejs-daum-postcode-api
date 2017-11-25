@@ -4,16 +4,16 @@
     <h1>Daum Postcode API with Vuejs</h1>
     <div class="postcode-input-wrapper">
       <b-form-group id="fieldset1" description="Enter your Address" label="Address1">
-        <b-form-input class="address1" id="input1"></b-form-input>
+        <b-form-input class="address1" id="input1" readonly="readonly" v-model="userFullAddress"></b-form-input>
         <b-button @click="showModal" variant="success">Find Address</b-button>
       </b-form-group>
       <b-form-group id="fieldset2" description="Enter your detail Address" label="Address2">
-        <b-form-input id="input2"></b-form-input>
+        <b-form-input id="input2" v-model="userDetailAddress"></b-form-input>
       </b-form-group>
     </div>
 
     <!-- Daum API Modal -->
-    <daum-post-code-modal ref="modal"></daum-post-code-modal>
+    <daum-post-code-modal @setUserData="setUserData" ref="modal"></daum-post-code-modal>
     <!--// Daum API Modal -->
   </div>
 </template>
@@ -23,9 +23,18 @@ import DaumPostCodeModal from './Components/DaumPostCodeModal';
 
 export default {
   name: 'app',
+  data () {
+    return {
+      userFullAddress: null,
+      userDetailAddress: null
+    }
+  },
   methods: {
     showModal () {
       this.$refs.modal.show();
+    },
+    setUserData (payload) {
+      this.userFullAddress = payload.fullAddress;
     }
   },
   components: {
